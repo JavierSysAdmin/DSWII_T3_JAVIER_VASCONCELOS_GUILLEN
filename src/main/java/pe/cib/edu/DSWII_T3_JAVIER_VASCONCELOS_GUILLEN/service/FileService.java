@@ -32,7 +32,7 @@ public class FileService implements IFileService{
 
     private void validarDoc(String filename) throws Exception {
         String extension = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
-        if (!extension.equals("doc")) {
+        if (!extension.equals("docx")) {
             throw new Exception("Solo archivos word");
         }
     }
