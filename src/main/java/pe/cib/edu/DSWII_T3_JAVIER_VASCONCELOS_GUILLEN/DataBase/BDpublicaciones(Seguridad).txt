@@ -1,0 +1,39 @@
+CREATE TABLE usuario (
+	idusuario INT auto_increment NOT NULL,
+	nomusuario varchar(100) NULL,
+	email varchar(200) NULL,
+	password varchar(300) NULL,
+	nombres varchar(100) NULL,
+	apellidos varchar(100) NULL,
+	activo BOOL NULL,
+	CONSTRAINT users_pk PRIMARY KEY (idusuario)
+);
+CREATE TABLE rol (
+	idrol INT auto_increment NOT NULL,
+	nomrol varchar(300) NULL,
+	CONSTRAINT roles_pk PRIMARY KEY (idrol)
+);
+CREATE TABLE usuario_rol (
+	idusuario INT NOT NULL,
+	idrol INT NOT NULL,
+	CONSTRAINT user_role_pk PRIMARY KEY (idusuario, idrol),
+	CONSTRAINT user_role_FK FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+	CONSTRAINT user_role_FK_1 FOREIGN KEY (idrol) REFERENCES rol(idrol)
+);
+
+INSERT INTO rol (nomrol) VALUES ('ADMIN');
+INSERT INTO rol (nomrol) VALUES ('Supervisor');
+
+-- las contraseñas son user1, user2, user3, user4, user5
+INSERT INTO usuario (nomusuario, email, password, nombres, apellidos, activo) VALUES
+('user1', 'user1@example.com', '$2a$12$ezrXXfvWPhw/HHIdYJBC/e8DcIf2tEGJzSDZIL7xbIZO/2EoXfqSe', 'user1', 'user1', TRUE),
+('user2', 'user2@example.com', '$2a$12$Rz3lFddcMIUs9hoAD1UXkOWk4cq7BBuCyLdome2vhEWhFjb.bG/fW', 'user2', 'user2', TRUE),
+('user3', 'user3@example.com', '$2a$12$x9xOU4gJV3/67fn6oui7Aulm0VjuHe3WJrNXdh.yTxY/pmygEEfmq', 'user3', 'user3', TRUE),
+('user4', 'user4@example.com', '$2a$12$w7hgB0vTxQKA1qRyrBy2ruHBQNRGOeXCLQmgVuR3p7u5iCJHJ/ZA6', 'user4', 'user4', TRUE),
+('user5', 'user5@example.com', '$2a$12$qOIxSZBIghZ5MhgehcxN4ehyzYku4svezhB0YHmP9rT0ypyJMoZ2K', 'user5', 'user5', TRUE);
+
+INSERT INTO usuario_rol (idusuario, idrol) VALUES (1, 1);
+INSERT INTO usuario_rol (idusuario, idrol) VALUES (2, 1);
+INSERT INTO usuario_rol (idusuario, idrol) VALUES (3, 2);
+INSERT INTO usuario_rol (idusuario, idrol) VALUES (4, 2);
+INSERT INTO usuario_rol (idusuario, idrol) VALUES (5, 2);
